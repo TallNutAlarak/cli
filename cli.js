@@ -1,7 +1,8 @@
 #! /usr/bin/env node
 import program from "commander";
 import { createRequire } from "module";
-import create from "./lib/create.js";
+import createProject from "./lib/create-project.js";
+import createPage from "./lib/create-page.js";
 
 const require = createRequire(import.meta.url);
 
@@ -15,15 +16,15 @@ program
     .description("create a new project")
     .option("-f, --force", "overwrite target directory if it exist")
     .action((name, options) => {
-        create(name, options);
+        createProject(name, options);
     });
 
 program
     .command("add <name>")
     .description("create a new page")
-    // .option("-f, --force", "overwrite target directory if it exist")
+    .option("-f, --force", "overwrite target directory if it exist")
     .action((name, options) => {
-        // TODO
+        createPage(name, options);
     });
 
 program.parse(process.argv);
