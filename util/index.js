@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import path from "path";
 import ejs from "ejs";
-import { ChildProcess, spawn } from "child_process";
+import { spawn } from "child_process";
 // https://github1s.com/zhangbanghui/zhang-cli/blob/master/lib/utils/utils.js
 
 export const commandSpan = (...args) => {
@@ -26,4 +26,17 @@ export const compile = (fileName, data) => {
             resolve(data);
         });
     });
+};
+
+export const pageName2ComponentName = (name) => {
+    const letterUppercase = (string) =>
+        string.charAt(0).toUpperCase() + string.slice(1);
+    let ret;
+    if (name.indexOf("-") !== -1) {
+        ret = name.split("-");
+        ret = ret.map((string) => letterUppercase(string)).join("");
+    } else {
+        ret = letterUppercase(name);
+    }
+    return ret;
 };
