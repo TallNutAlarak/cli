@@ -3,6 +3,7 @@ import path from "path";
 import ejs from "ejs";
 import { spawn } from "child_process";
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 export const commandSpan = (...args) => {
     return new Promise((resolve, reject) => {
@@ -54,7 +55,7 @@ export const handlePathExist = async (targetAir) => {
             {
                 name: "action",
                 type: "list",
-                message: "Target directory already exists Pick an action:",
+                message: `Target directory(${targetAir}) already exists Pick an action:`,
                 choices: [
                     {
                         name: "Cancel",

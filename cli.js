@@ -4,6 +4,7 @@ import { createRequire } from "module";
 import createProject from "./lib/create-project.js";
 import createPage from "./lib/create-page.js";
 import generateApi from "./lib/generate-api.js";
+import chalk from "chalk";
 
 const require = createRequire(import.meta.url);
 
@@ -29,13 +30,18 @@ program
     });
 
 program
-    .command("api <url>")
-    .description("generate services function")
+    .command("api <ip>")
+    .description("generate services function by apiDoc ip")
     // .option("-f, --force", "overwrite target directory if it exist")
-    .action((url, options) => {
-        // TODO
-        generateApi("http://210.74.12.207:8811/apidoc/api_data.js?v=1635933683444");
-        // generateApi("http://210.74.13.141:8811/apidoc/api_data.js?v=1635991507224");
+    .action((ip) => {
+        let verifyIp;
+        try {
+            verifyIp = new URL(ip);
+        } catch (err) {
+            console.log(chalk.red("ip地址解析失败，请确认是否写错"));
+            return;
+        }
+        generateApi(`${verifyIp.href}apidoc/api_data.js?v=${Date.now()}`);
     });
 
 program.parse(process.argv);

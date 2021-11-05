@@ -1,3 +1,4 @@
 export default {
-    repositoryPath: "TallNutAlarak/ReactAppBase",
+    baseProjectRepositoryPath: "TallNutAlarak/ReactAppBase",
+    apiGenerateTargetDirName: "modules-generated",
 };
