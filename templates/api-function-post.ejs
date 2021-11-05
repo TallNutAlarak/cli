@@ -1,0 +1,19 @@
+//  <%= data.description %>
+export interface <%= data.IParamsName %>{
+    <% data.IParams.forEach(function(item){%><%=item.field %>: <%=item.type %>;
+    <% }) %>
+}
+export const <%= data.name %> = (data:<%= data.IParamsName %>) => {
+    return request({
+        url: '<%= data.url %>',
+        method:'<%= data.method %>',
+        data,
+    }).catch(err=>{
+        const errCode = err.response.data.code;
+        switch(errCode){<% data.error.forEach(function(item){%>
+                case <%=item.code %>: message.error("<%=item.message %>")
+            <% }) %>
+        }
+    });
+};
+

@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import path from "path";
 import ejs from "ejs";
 import { spawn } from "child_process";
-// https://github1s.com/zhangbanghui/zhang-cli/blob/master/lib/utils/utils.js
+import inquirer from "inquirer";
 
 export const commandSpan = (...args) => {
     return new Promise((resolve, reject) => {
@@ -27,10 +27,14 @@ export const compile = (fileName, data) => {
         });
     });
 };
+// 首字母大写
+export const letterUppercase = (string) =>
+    string.charAt(0).toUpperCase() + string.slice(1);
+// 首字母小写
+export const letterLowercase = (string) =>
+    string.charAt(0).toLowerCase() + string.slice(1);
 
 export const pageName2ComponentName = (name) => {
-    const letterUppercase = (string) =>
-        string.charAt(0).toUpperCase() + string.slice(1);
     let ret;
     if (name.indexOf("-") !== -1) {
         ret = name.split("-");
@@ -39,4 +43,37 @@ export const pageName2ComponentName = (name) => {
         ret = letterUppercase(name);
     }
     return ret;
+};
+
+export const handlePathExist = async (targetAir) => {
+    // 目录是否已经存在？
+    if (fs.existsSync(targetAir)) {
+        // 是否为强制创建？
+        // 询问用户是否确定要覆盖
+        let { action } = await inquirer.prompt([
+            {
+                name: "action",
+                type: "list",
+                message: "Target directory already exists Pick an action:",
+                choices: [
+                    {
+                        name: "Cancel",
+                        value: false,
+                    },
+                    {
+                        name: "Overwrite",
+                        value: "overwrite",
+                    },
+                ],
+            },
+        ]);
+        if (!action) {
+            return;
+        } else if (action === "overwrite") {
+            // 移除已存在的目录
+            console.log(`Removing...`);
+            await fs.remove(targetAir);
+            console.log(`Removed`);
+        }
+    }
 };
