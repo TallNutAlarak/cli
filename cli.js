@@ -5,6 +5,7 @@ import createProject from "./lib/create-project.js";
 import createPage from "./lib/create-page.js";
 import generateApi from "./lib/generate-api.js";
 import chalk from "chalk";
+import { wrapLoading } from "./util/index.js";
 
 const require = createRequire(import.meta.url);
 
@@ -30,10 +31,10 @@ program
     });
 
 program
-    .command("api <ip>")
+    .command("api <ip> [module-name]")
     .description("generate services function by apiDoc ip")
     // .option("-f, --force", "overwrite target directory if it exist")
-    .action((ip) => {
+    .action((ip, moduleName) => {
         let verifyIp;
         try {
             verifyIp = new URL(ip);
@@ -41,7 +42,10 @@ program
             console.log(chalk.red("ip地址解析失败，请确认是否写错"));
             return;
         }
-        generateApi(`${verifyIp.href}apidoc/api_data.js?v=${Date.now()}`);
+        generateApi(
+            `${verifyIp.href}apidoc/api_data.js?v=${Date.now()}`,
+            moduleName
+        );
     });
 
 program.parse(process.argv);

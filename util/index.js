@@ -4,6 +4,25 @@ import ejs from "ejs";
 import { spawn } from "child_process";
 import inquirer from "inquirer";
 import chalk from "chalk";
+import ora from "ora";
+
+// 添加加载动画
+export async function wrapLoading(fn, message, ...args) {
+    // 使用 ora 初始化，传入提示信息 message
+    const spinner = ora(message);
+    // 开始加载动画
+    spinner.start();
+    try {
+        // 执行传入方法 fn
+        const result = await fn(...args);
+        // 状态为修改为成功
+        spinner.succeed();
+        return result;
+    } catch (error) {
+        // 状态为修改为失败
+        spinner.fail("Request failed");
+    }
+}
 
 export const commandSpan = (...args) => {
     return new Promise((resolve, reject) => {
@@ -72,9 +91,9 @@ export const handlePathExist = async (targetAir) => {
             return;
         } else if (action === "overwrite") {
             // 移除已存在的目录
-            console.log(`Removing...`);
+            console.log(chalk.blue("Removing..."));
             await fs.remove(targetAir);
-            console.log(`Removed`);
+            console.log(chalk.green("Removed"));
         }
     }
 };
