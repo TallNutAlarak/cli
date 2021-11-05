@@ -31,10 +31,10 @@ program
     });
 
 program
-    .command("api <ip> [module-name]")
+    .command("api <ip> [module-dir-name]")
     .description("generate services function by apiDoc ip")
     // .option("-f, --force", "overwrite target directory if it exist")
-    .action((ip, moduleName) => {
+    .action((ip, moduleDirName) => {
         let verifyIp;
         try {
             verifyIp = new URL(ip);
@@ -44,7 +44,7 @@ program
         }
         generateApi(
             `${verifyIp.href}apidoc/api_data.js?v=${Date.now()}`,
-            moduleName
+            moduleDirName
         );
     });
 
