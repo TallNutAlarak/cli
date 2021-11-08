@@ -1,8 +1,9 @@
-//  <%= data.description %>
+//  <%= data.description %>  ---start
 export interface <%= data.IParamsName %>{
     <% data.IParams.forEach(function(item){%><%=item.field %>: <%=item.type %>;
     <% }) %>
 }
+<%= data.IRet %>
 export const <%= data.name %> = (data:<%= data.IParamsName %>) => {
     return request({
         url: '<%= data.url %>',
@@ -14,6 +15,8 @@ export const <%= data.name %> = (data:<%= data.IParamsName %>) => {
                 case <%=item.code %>: message.error("<%=item.message %>")
             <% }) %>
         }
-    });
+    }) as Promise<AxiosResponse<<%= data.IRetName %>>>;
 };
+//  <%= data.description %> ----end
+
 
