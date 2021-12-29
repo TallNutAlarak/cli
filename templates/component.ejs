@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useContext } from "react";
+import React, { memo, useState, useEffect, useContext ,useRef} from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import {} from "react-query";
 
@@ -6,7 +6,6 @@ import { Button } from "antd";
 import {} from "@ant-design/icons";
 
 import { appContext } from "@store";
-import { customLog } from "@utils"
 import { gqlReq } from "@services"
 
 export default memo(function <%= data.componentName %>() {
