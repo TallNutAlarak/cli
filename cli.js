@@ -18,6 +18,7 @@ program
     .command("create <name>")
     .description("create a new project")
     .option("-f, --force", "overwrite target directory if it exist")
+    .option("-s, --strict", "use strict mode in project")
     .action((name, options) => {
         createProject(name, options);
     });
