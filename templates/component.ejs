@@ -5,12 +5,16 @@ import {} from "react-query";
 import { Button } from "antd";
 import {} from "@ant-design/icons";
 
-import { appContext } from "@store";
 import { gqlReq } from "@services"
+
+import { useSelector, useDispatch } from 'react-redux';
+import type { IStore } from '@store';
 
 export default memo(function <%= data.componentName %>() {
     const location = useLocation();
     const history = useHistory();
+
+    const storeInfo = useSelector((store: IStore) => store);
 
     useEffect(()=>{
 
