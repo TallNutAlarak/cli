@@ -1,28 +1,30 @@
-import React, { memo, useState, useEffect, useContext ,useRef} from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import {} from "react-query";
+import React, { useEffect, useState, useRef, memo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import {} from 'antd';
+import {} from '@ant-design/icons';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import useUrlState from '@ahooksjs/use-url-state';
 
-import { Button } from "antd";
-import {} from "@ant-design/icons";
+import AppBreadcrumb from '@components/app-breadcrumb';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
-import { gqlReq } from "@services"
+import type { ColumnsType } from 'antd/lib/table';
 
-import { useSelector, useDispatch } from 'react-redux';
-import type { IStore } from '@store';
-
-export default memo(function <%= data.componentName %>() {
+const <%= data.componentName %> = () => {
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
 
-    const storeInfo = useSelector((store: IStore) => store);
-
-    useEffect(()=>{
-
-    },[])
+    const dispatch = useAppDispatch();
+    const userInfo = useAppSelector((store) => store.user);
 
     return (
-        <div>
-            <h2><%= data.componentName %></h2>
-        </div>
+    <div className='<%= data.name %>-container'>
+        <AppBreadcrumb></AppBreadcrumb>
+        <h2>
+            <%= data.componentName %>
+        </h2>
+    </div>
     );
-});
+};
+
+export default memo(<%= data.componentName %>);
