@@ -27,6 +27,7 @@ program
     .command("add <name>")
     .description("create a new page")
     .option("-f, --force", "overwrite target directory if it exist")
+    .option("-c, --component", "create a new component")
     .action((name, options) => {
         createPage(name, options);
     });
