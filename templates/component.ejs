@@ -1,12 +1,22 @@
 import React, { useEffect, useState, useRef, memo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {} from 'antd';
+import {message,Form,Space} from 'antd';
 import {} from '@ant-design/icons';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import useUrlState from '@ahooksjs/use-url-state';
 
+import PageTitle from '@components/page-title';
 import AppBreadcrumb from '@components/app-breadcrumb';
+import AppCard from '@components/app-card';
+import AppButton from '@components/app-button';
+import AppTable from '@components/app-table';
+import AppModal from '@components/app-modal';
+import AppInput from '@components/app-input';
+import AppSelect from '@components/app-select';
+import StatusTag from '@components/status-tag';
+
 import { useAppDispatch, useAppSelector } from '@hooks';
+import { confirmModal } from '@utils';
 
 import type { ColumnsType } from 'antd/lib/table';
 
@@ -20,11 +30,13 @@ const <%= data.componentName %> = () => {
     return (
     <div className='<%= data.name %>-container'>
         <AppBreadcrumb></AppBreadcrumb>
-        <h2>
-            <%= data.componentName %>
-        </h2>
+        <AppCard>
+            <h2>
+                <%= data.componentName %>
+            </h2>
+        </AppCard>
     </div>
     );
-};
+    };
 
-export default memo(<%= data.componentName %>);
+    export default memo(<%= data.componentName %>);
