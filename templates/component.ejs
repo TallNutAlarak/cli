@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, memo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {message,Form,Space} from 'antd';
+import {Form,Space,message} from 'antd';
 import {} from '@ant-design/icons';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import useUrlState from '@ahooksjs/use-url-state';
@@ -20,23 +20,36 @@ import { confirmModal } from '@utils';
 
 import type { ColumnsType } from 'antd/lib/table';
 
-const <%= data.componentName %> = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
+import "./<%= data.name %>.less"
 
-    const dispatch = useAppDispatch();
-    const userInfo = useAppSelector((store) => store.user);
+    const <%= data.componentName %> = () => {
+        const location = useLocation();
+        const navigate = useNavigate();
 
-    return (
-    <div className='<%= data.name %>-container'>
-        <AppBreadcrumb></AppBreadcrumb>
-        <AppCard>
-            <h2>
-                <%= data.componentName %>
-            </h2>
-        </AppCard>
-    </div>
-    );
-    };
+        const dispatch = useAppDispatch();
+        const userInfo = useAppSelector((store) => store.user);
 
-    export default memo(<%= data.componentName %>);
+        const [demoForm] = Form.useForm<{ TODO: string; }>();
+
+            const demoMutation = useMutation("TODO", {
+            onSuccess() {
+            message.success('修改成功');
+            },
+            onError(err:any) {
+            message.error('修改失败');
+            }
+            });
+
+            return (
+            <div className='<%= data.name %>-container'>
+                <AppBreadcrumb></AppBreadcrumb>
+                <AppCard>
+                    <h2>
+                        <%= data.componentName %>
+                    </h2>
+                </AppCard>
+            </div>
+            );
+            };
+
+            export default memo(<%= data.componentName %>);
