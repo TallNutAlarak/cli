@@ -1,0 +1,16 @@
+import React, { useEffect, useState, useRef, memo } from 'react';
+
+import type { ColumnsType } from 'antd/lib/table';
+
+import "./<%= data.name %>.less"
+
+const <%= data.reactComponentName %> = () => {
+
+    return (
+        <div className='<%= data.name %>-container'>
+            
+        </div>
+    );
+};
+
+export default memo(<%= data.reactComponentName %>);

@@ -54,7 +54,7 @@ export const letterUppercase = (string) =>
 export const letterLowercase = (string) =>
     string.charAt(0).toLowerCase() + string.slice(1);
 
-export const pageName2ComponentName = (name) => {
+export const name2ReactComponentName = (name) => {
     let ret;
     if (name.indexOf("-") !== -1) {
         ret = name.split("-");

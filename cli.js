@@ -2,7 +2,7 @@
 import program from "commander";
 import { createRequire } from "module";
 import createProject from "./lib/create-project.js";
-import createPage from "./lib/create-page.js";
+import createComponent from "./lib/create-component.js";
 import generateApi from "./lib/generate-api.js";
 import chalk from "chalk";
 import { wrapLoading } from "./util/index.js";
@@ -25,11 +25,11 @@ program
 
 program
     .command("add <name>")
-    .description("create a new page")
+    .description("create a new component directory")
     .option("-f, --force", "overwrite target directory if it exist")
-    .option("-c, --component", "create a new component")
+    .option("-t,--target <path>", "生成的目标文件夹")
     .action((name, options) => {
-        createPage(name, options);
+        createComponent(name, options);
     });
 
 program
